@@ -1,3 +1,8 @@
+/* 
+Copyright 2013 Jose Rojas 
+All rights reserved.   
+*/
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;

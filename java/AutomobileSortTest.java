@@ -1,3 +1,8 @@
+/* 
+Copyright 2013 Jose Rojas 
+All rights reserved.   
+*/
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

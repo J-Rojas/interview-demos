@@ -1,3 +1,7 @@
+<!-- 
+Copyright 2013 Jose Rojas 
+All rights reserved.   
+-->
 <project default="test">
     <target name="compile">
         <mkdir dir="build/" />
