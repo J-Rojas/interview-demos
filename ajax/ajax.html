@@ -99,12 +99,13 @@
             if (data.automobiles)
             {
                 data.automobiles.sort(function(a, b) {
-                    return a.mpg < b.mpg;
+                    return b.mpg - a.mpg;
                 });  
                 
                 var tmpl = $('#carList [name=cars]>[name=tmpl]');
                 tmpl.removeClass('hide');
                 var cars = $('#carList [name=cars]');
+                tmpl.remove();
                 cars.html('');
                 data.automobiles.forEach(function (item) {
                     var clone = tmpl.clone();                    
