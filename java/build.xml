@@ -1,0 +1,13 @@
+<project default="test">
+    <target name="compile">
+        <mkdir dir="build/" />
+    
+        <javac srcdir="." destdir="build/" classpath="lib/junit-4.11.jar"/>
+    </target>
+    
+    <target name="test" depends="compile">
+        <java classpath="build/;lib/hamcrest-core-1.3.jar;lib/junit-4.11.jar" classname="org.junit.runner.JUnitCore">
+            <arg value="AutomobileSortTest" />
+        </java>
+    </target>
+</project>

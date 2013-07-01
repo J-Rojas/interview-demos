@@ -1,0 +1,136 @@
+<!DOCTYPE>
+<html>
+    <!-- 
+    Copyright 2013 Jose Rojas 
+    License: MIT
+    -->
+    <head>
+        <style>
+            html, body {
+                width: 100%;
+                height: 100%;
+                background-color: #dedede;
+                font: 16px 'sans-serif';
+                margin: 0px;
+                padding: 0px;
+            }               
+            
+            div#carList {
+                padding-top: 40px;
+                text-align: center;                
+            }
+            
+            ul {                
+                padding: 0px;
+                margin: 0px;
+            }
+            
+            li {
+                list-style-type: none;                
+            }
+            
+            div#carList>[name=headings]>span {
+                border-bottom: 2px solid #333333;    
+            }
+                        
+            div#carList>[name=cars]>li>span {
+                border-bottom: 1px solid #888888;    
+            }
+                        
+            div#carList>[name=headings]>span,
+            div#carList>[name=cars]>li>span {
+                display: inline-block;
+                min-width: 150px;
+                text-align: left;                
+                padding: 5px;
+            }
+            
+            div#carList .col1 {
+                background-color: #afa;
+                border-left: 3px solid #333;
+            }
+            
+            div#carList .col2 {
+                background-color: #ffa;
+                border-left: 3px solid #333;
+            }
+            
+            div#carList .col3 {
+                background-color: #aff;
+                border-left: 3px solid #333;
+                border-right: 3px solid #333;
+            }
+            
+            .hide {
+                display: none;
+            }
+                        
+        </style>
+    </head>
+    <body>        
+        <div id="carList">
+            <div name="headings" >
+                <span class="col1">Name</span
+                ><span class="col2">Price</span
+                ><span class="col3">MPG</span>
+            </div>
+            <ul name="cars" >
+                Loading Car List...
+                <li name="tmpl" class="hide">
+                    <span class="col1" name="name"></span
+                    ><span class="col2" name="price"></span
+                    ><span class="col3" name="mpg"></span>
+                </li>            
+            </ul>
+        </div>
+    </body>
+    <!-- jquery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script>
+    (function () {
+        
+        /* parseCars(data)
+           data is the car json array
+           The function will build the cars data list using a hidden template node
+           that is provided in the tree.
+        */
+        function parseCars(data) {
+            if (data.automobiles)
+            {
+                data.automobiles.sort(function(a, b) {
+                    return a.mpg < b.mpg;
+                });  
+                
+                var tmpl = $('#carList [name=cars]>[name=tmpl]');
+                tmpl.removeClass('hide');
+                var cars = $('#carList [name=cars]');
+                cars.html('');
+                data.automobiles.forEach(function (item) {
+                    var clone = tmpl.clone();                    
+                    $('[name=name]',clone).text(item.name);
+                    $('[name=price]',clone).text(item.price);
+                    $('[name=mpg]',clone).text(item.mpg);
+                    cars.append(clone);
+                });                                
+            }
+            else
+                handleError();
+        }
+        
+        function handleError(xhr, status, errString) {
+            $('#carList').html('Oops! There was an error');
+        }
+        
+        $(document).ready(function(){
+            //get the cars list
+            $.ajax({
+                url: 'cars.json', //this can be http://example.com/automobiles/list
+                dataType: 'json',
+                success: parseCars,
+                error: handleError
+            })
+        });        
+        
+    })();
+    </script>
+</html>

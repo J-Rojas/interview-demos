@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <!-- 
+    Copyright 2013 Jose Rojas 
+    License: MIT
+    -->
+    <head>
+        <!-- optimize for mobile -->
+        <title>CSS3 Demo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" >        
+        <style>
+            html, body {                
+                height: 100%;                
+                background-color: #aaa;
+                padding: 0px;
+                margin: 0px;
+                min-width: 720px; /*170 + 200 + 350 = 720*/
+            }
+                   
+            div {
+                position: relative;
+                display: inline-block;                
+                color: white;
+                font: 20px 'sans-serif';                                
+            }
+            
+            div > span {
+                padding-top: 20px;
+                padding: 20px;
+            }
+                   
+                   
+            #left {                
+                width: 170px;                
+                height: 100%;
+                background-color: #a00;                       
+            }
+            
+            #center {   
+                position: absolute;
+                height: 100%;
+                min-width: 350px;                
+                background-color: #0a0;                
+                left: 170px;
+                right: 200px;
+            }
+            
+            #right {                
+                width: 200px;
+                height: 100%;                
+                background-color: #00a;                
+                float: right;
+            }
+                        
+            @media only screen and (max-width: 719px)
+            {                       
+                html, body {
+                    width: 100%;
+                    min-width: 350px;
+                }
+                
+                /* work around mobile device (Android) auto-fitting */
+                #left, #center, #right {
+                    background-image:url(''); 
+                    background-repeat:repeat;
+                }
+                
+                #left, #center, #right {
+                    width: 100%;
+                    position: relative;
+                    float: none;
+                    left: 0px;
+                    right: 0px;
+                    height: 33.3333%; 
+                    /* force all columns to have the same min-width */
+                    min-width: 350px;
+                }
+                
+                .paren {
+                    display: none;
+                }
+            }
+            
+        </style>
+    </head>
+    <body>        
+        <div id="left"><br /><span>left <span class="paren">(170px)</span></span></div>
+        <div id="center"><br /><span>center <span class="paren">(fill, min 350px)</span></span></div>        
+        <div id="right"><br /><span>right <span class="paren">(200px)</span></span></div>        
+    </body>
+</html>
